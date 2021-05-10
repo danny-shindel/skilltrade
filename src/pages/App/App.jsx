@@ -21,6 +21,8 @@ export default function App() {
     getLocation()
   }, []);
 
+  
+
   return (
     <main className="App">
       { user ? 
@@ -28,16 +30,13 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Switch>
             <Route path="/dashboard">
-              < Dashboard posts={posts} userPosts={userPosts}/>
+              < Dashboard />
             </Route>
-            {/* <Route path="/dashboard">
-              < Test posts={posts} userPosts={userPosts}/>
-            </Route> */}
             <Redirect to="/dashboard" />
           </Switch>
         </>
         :
-        <AuthPage setUser={setUser} location={location}/>
+        location.latitude ? <AuthPage setUser={setUser} location={location}/> : <div>loading location</div>
       }
     </main>
   );

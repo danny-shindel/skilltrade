@@ -4,7 +4,7 @@ export default function PostItem({ post }) {
 
     return (
         <div className="PostItem" >
-            {post}
+            {post.title}
         </div>
     );
 }

@@ -1,0 +1,14 @@
+.PostCreate {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1vmin;
+  margin-bottom: 2vmin;
+  padding: 2vmin;
+  color: var(--text-light);
+  background-color: var(--white);
+  border: .1vmin solid var(--tan-3);
+  border-radius: 1vmin;
+  font-size: 4vmin;
+}
