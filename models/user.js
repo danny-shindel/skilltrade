@@ -18,6 +18,10 @@ const userSchema = new Schema({
     trim: true,
     minLength: 3,
     required: true
+  },
+  location: {
+    type: Object,
+    required: true
   }
 }, {
   timestamps: true,

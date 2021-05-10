@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import AuthPage from '../AuthPage/AuthPage';
@@ -10,7 +10,17 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [posts, setPost] = useState(['posts','posts2'])
   const [userPosts, setUserPosts] = useState(['userPost','userPost2'])
+  const [location, setLocation] = useState({})
   
+  useEffect(function () {
+    function getLocation() {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLocation({ latitude:position.coords.latitude, longitude:position.coords.longitude })
+      });
+    }
+    getLocation()
+  }, []);
+
   return (
     <main className="App">
       { user ? 
@@ -27,7 +37,7 @@ export default function App() {
           </Switch>
         </>
         :
-        <AuthPage setUser={setUser} />
+        <AuthPage setUser={setUser} location={location}/>
       }
     </main>
   );

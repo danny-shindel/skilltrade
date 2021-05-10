@@ -1,21 +1,13 @@
 import { useState } from 'react';
 import * as usersService from '../../utilities/users-service';
 
-export default function LogIn({ setUser }) {
+export default function LogIn({ setUser, location }) {
   const [credentials, setCredentials] = useState({
     email: '',
-    password: ''
+    password: '',
+    location: location,
   });
   const [error, setError] = useState('');
-
-  function componentDidMount() {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
-  }
-
-  componentDidMount()
 
   function handleChange(evt) {
     setCredentials({ ...credentials, [evt.target.name]: evt.target.value });

@@ -4,6 +4,7 @@ import './PostList.css';
 
 export default function PostList({ posts, userPosts}) {
     const [selected, setSelected] = useState('SKILLS')
+    const [create, setCreate] = useState(false)
 
     const miles = [1,5,10,15,30,50,100]
     const postItems = selected === 'SKILLS' ? posts : userPosts;
@@ -29,7 +30,7 @@ export default function PostList({ posts, userPosts}) {
                 <select></select>
                 <button>SEARCH</button>
             </div>
-            <div className={selected === 'SKILLS' ? 'display-none' : 'addNew'}>
+            <div className={selected === 'SKILLS' ? 'display-none' : 'addNew'} onClick={() => setCreate(true)}>
                 <div>ADD A NEW POST</div>
             </div>
            {list}
