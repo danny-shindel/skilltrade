@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import AuthPage from '../AuthPage/AuthPage';
-import NewOrderPage from '../NewOrderPage/NewOrderPage';
-import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
+import Dashboard from '../Dashboard/Dashboard';
 import NavBar from '../../components/NavBar/NavBar';
 import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [posts, setPost] = useState(['posts','posts2'])
+  const [userPosts, setUserPosts] = useState(['userPost','userPost2'])
   
   return (
     <main className="App">
@@ -16,13 +17,10 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser} />
           <Switch>
-            <Route path="/orders/new">
-              <NewOrderPage />
+            <Route path="/dashboard">
+              < Dashboard posts={posts} userPosts={userPosts}/>
             </Route>
-            <Route path="/orders">
-              <OrderHistoryPage />
-            </Route>
-            <Redirect to="/orders" />
+            <Redirect to="/dashboard" />
           </Switch>
         </>
         :
