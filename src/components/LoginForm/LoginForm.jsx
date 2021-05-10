@@ -8,6 +8,15 @@ export default function LogIn({ setUser }) {
   });
   const [error, setError] = useState('');
 
+  function componentDidMount() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }
+
+  componentDidMount()
+
   function handleChange(evt) {
     setCredentials({ ...credentials, [evt.target.name]: evt.target.value });
     setError('');

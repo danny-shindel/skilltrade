@@ -20,6 +20,9 @@ export default function App() {
             <Route path="/dashboard">
               < Dashboard posts={posts} userPosts={userPosts}/>
             </Route>
+            {/* <Route path="/dashboard">
+              < Test posts={posts} userPosts={userPosts}/>
+            </Route> */}
             <Redirect to="/dashboard" />
           </Switch>
         </>
