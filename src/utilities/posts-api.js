@@ -12,3 +12,7 @@ export function getUserPosts() {
 export function getFilteredPosts(filter) {
     return sendRequest(`${BASE_URL}/filteredposts`, 'POST', filter);
 }
+
+export function deletePost(post) {
+    return sendRequest(`${BASE_URL}/deletepost`, 'POST', post);
+}

@@ -20,14 +20,18 @@ postSchema.statics.getAll = function (userId) {
 
 postSchema.statics.filterPosts = async function (filter, location) {
     // 'this' is bound to the model
-    const posts = await this.find({}).populate('user');
-    const filteredPosts = []
-    console.log(posts)
+    const posts = await this.find(filter.category.length > 1 ? { category: filter.category} : {}).populate('user');
+    let locationFilter = []
     posts.forEach(post => {
-        if (distance(location.latitude, post.user.location.latitude, location.longitude, post.user.location.longitude) <= filter.distance)
-            filteredPosts.push(post)
+        if (distance(location.latitude, post.user.location.latitude, location.longitude, post.user.location.longitude) <= filter.distance) locationFilter.push(post)
     })
-    return filteredPosts
+    let finalFilter = []
+    if (filter.title.length >= 1){
+        locationFilter.forEach(post => {
+            if (post.title.toLowerCase().indexOf(filter.title.toLowerCase()) > -1) finalFilter.push(post)
+        })
+    } else finalFilter = [...locationFilter]
+    return finalFilter
 };
 
 module.exports = mongoose.model('Post', postSchema);

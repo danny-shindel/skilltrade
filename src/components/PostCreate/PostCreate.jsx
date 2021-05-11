@@ -5,7 +5,7 @@ import './PostCreate.css';
 export default function PostCreate({ setCreate, setUserPosts, userPosts, categories }) {
     const [newPost, setNewPost] = useState({
         title: "",
-        category: "",
+        category: "Arts/Crafts",
         description: "",
     })
 
