@@ -14,5 +14,5 @@ export function getFilteredPosts(filter) {
 }
 
 export function deletePost(post) {
-    return sendRequest(`${BASE_URL}/deletepost`, 'POST', post);
+    return sendRequest(`${BASE_URL}/deletepost`, 'DELETE', post);
 }

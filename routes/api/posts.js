@@ -5,7 +5,7 @@ const postsCtrl = require('../../controllers/api/posts');
 router.get('/userposts', postsCtrl.getUserPosts);
 router.post('/create', postsCtrl.create);
 router.post('/filteredposts', postsCtrl.getFilteredPosts);
-router.post('/deletepost', postsCtrl.deletePost);
+router.delete('/deletepost', postsCtrl.deletePost);
 
 
 module.exports = router;
