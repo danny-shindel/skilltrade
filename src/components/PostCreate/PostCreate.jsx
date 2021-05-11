@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as postsAPI from '../../utilities/posts-api';
 import './PostCreate.css';
 
-export default function PostCreate({ setCreate, setUserPosts, userPosts, categories }) {
+export default function PostCreate({ setCreate, setUserPosts, categories, setPosts, filter }) {
     const [newPost, setNewPost] = useState({
         title: "",
         category: "Arts/Crafts",
@@ -15,9 +15,11 @@ export default function PostCreate({ setCreate, setUserPosts, userPosts, categor
 
     async function handleSubmit(evt){
         evt.preventDefault();
-        const newUserPost = await postsAPI.create(newPost);
+        const newUserPosts = await postsAPI.create(newPost);
+        const allFilteredPosts = await postsAPI.getFilteredPosts(filter);
         setCreate(false)
-        setUserPosts([...userPosts, newUserPost])
+        setUserPosts(newUserPosts)
+        setPosts(allFilteredPosts)
     }
 
     return (

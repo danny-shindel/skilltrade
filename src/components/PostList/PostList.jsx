@@ -6,8 +6,7 @@ import PostEdit from '../PostEdit/PostEdit';
 import * as postsAPI from '../../utilities/posts-api';
 import './PostList.css';
 
-export default function PostList() {
-    const [deleted, setDeleted] = useState(false)
+export default function PostList({ user }) {
     const [selected, setSelected] = useState('SKILLS')
     const [create, setCreate] = useState(false)
     const [posts, setPosts] = useState(['posts', 'posts2'])
@@ -38,10 +37,9 @@ export default function PostList() {
             const allFilteredPosts = await postsAPI.getFilteredPosts(filter);
             setUserPosts(allUserPosts);
             setPosts(allFilteredPosts);
-            setDeleted(false)
         }
         getPosts();
-    },[deleted])
+    },[])
 
     function handleChange(evt) {
         setFilter({ ...filter, [evt.target.name]: evt.target.value });
@@ -50,12 +48,6 @@ export default function PostList() {
     async function handleSubmit(evt) {
         const filterSearch = await postsAPI.getFilteredPosts(filter);
         setPosts(filterSearch)
-    }
-
-    async function handleDelete(post) {
-        const deletedPost = await postsAPI.deletePost(post);
-        setDetail(false)
-        setDeleted(true)
     }
 
     return (
@@ -85,9 +77,11 @@ export default function PostList() {
                         <div>ADD A NEW POST</div>
                     </div>
                     {list}
-                </> : selected === 'SKILLS' ? <PostDetail detail={detail} setDetail={setDetail} /> : <PostEdit detail={detail} setDetail={setDetail} handleDelete={handleDelete}/>
+                </> : selected === 'SKILLS' ? 
+                <PostDetail detail={detail} setDetail={setDetail} user={user} userPosts={userPosts}/> :
+                <PostEdit detail={detail} setDetail={setDetail} categories={categories} setUserPosts={setUserPosts} setPosts={setPosts} filter={filter} />
                 :
-                <PostCreate setCreate={setCreate} setUserPosts={setUserPosts} userPosts={userPosts} categories={categories} setPosts={setPosts}/>
+                <PostCreate setCreate={setCreate} setUserPosts={setUserPosts} categories={categories} setPosts={setPosts} filter={filter}/>
             }
         </div>
     );

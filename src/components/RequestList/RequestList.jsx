@@ -4,7 +4,7 @@ export default function RequestList() {
 
     return (
         <div className="RequestList">
-            <div><button>INBOX</button><button>SENT</button></div>
+            <div><button>ACCEPTED</button><button>PENDING</button><button>SENT</button></div>
         </div>
     );
 }

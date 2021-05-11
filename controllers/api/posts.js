@@ -7,6 +7,7 @@ module.exports = {
     getFilteredPosts,
     create,
     deletePost,
+    updatePost,
 };
 
 async function getUserPosts(req,res) {
@@ -21,11 +22,19 @@ async function getFilteredPosts(req,res) {
 }
 
 async function create(req,res) {
-    const posts = await Post.create({...req.body, user:req.user._id});
+    await Post.create({...req.body, user:req.user._id});
+    const posts = await Post.getAll(req.user._id);
     res.json(posts);
 }
 
 async function deletePost(req,res) {
-    const post = await Post.findByIdAndDelete(req.body._id);
-    res.json(post);
+    await Post.findOneAndDelete({_id:req.body._id, user:req.user._id});
+    const posts = await Post.getAll(req.user._id);
+    res.json(posts);
+}
+
+async function updatePost(req,res) {
+    await Post.findOneAndUpdate({_id:req.body._id, user:req.user._id},{...req.body});
+    const posts = await Post.getAll(req.user._id);
+    res.json(posts);
 }

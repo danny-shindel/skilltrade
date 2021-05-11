@@ -14,12 +14,10 @@ const postSchema = new Schema({
 });
 
 postSchema.statics.getAll = function (userId) {
-    // 'this' is bound to the model
     return this.find({ user: userId });
 };
 
 postSchema.statics.filterPosts = async function (filter, location) {
-    // 'this' is bound to the model
     const posts = await this.find(filter.category.length > 1 ? { category: filter.category} : {}).populate('user');
     let locationFilter = []
     posts.forEach(post => {
@@ -48,6 +46,5 @@ function distance(lat1, lat2, lon1, lon2) {
         * Math.pow(Math.sin(dlon / 2), 2);
     let c = 2 * Math.asin(Math.sqrt(a));
     let r = 3965;
-    console.log(c * r)
     return (c * r);
 }

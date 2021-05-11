@@ -16,3 +16,7 @@ export function getFilteredPosts(filter) {
 export function deletePost(post) {
     return sendRequest(`${BASE_URL}/deletepost`, 'DELETE', post);
 }
+
+export function update(post) {
+    return sendRequest(`${BASE_URL}/update`, 'POST', post);
+}

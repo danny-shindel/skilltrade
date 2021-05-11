@@ -6,6 +6,7 @@ router.get('/userposts', postsCtrl.getUserPosts);
 router.post('/create', postsCtrl.create);
 router.post('/filteredposts', postsCtrl.getFilteredPosts);
 router.delete('/deletepost', postsCtrl.deletePost);
+router.post('/update', postsCtrl.updatePost);
 
 
 module.exports = router;

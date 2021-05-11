@@ -8,8 +8,6 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  const [posts, setPost] = useState(['posts','posts2'])
-  const [userPosts, setUserPosts] = useState(['userPost','userPost2'])
   const [location, setLocation] = useState({})
   
   useEffect(function () {
@@ -30,7 +28,7 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Switch>
             <Route path="/dashboard">
-              < Dashboard />
+              < Dashboard user={user}/>
             </Route>
             <Redirect to="/dashboard" />
           </Switch>
