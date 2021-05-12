@@ -9,7 +9,7 @@ import './PostList.css';
 export default function PostList({ user }) {
     const [selected, setSelected] = useState('SKILLS')
     const [create, setCreate] = useState(false)
-    const [posts, setPosts] = useState(['posts', 'posts2'])
+    const [posts, setPosts] = useState([])
     const [userPosts, setUserPosts] = useState([])
     const [detail, setDetail] = useState(false)
     const [filter, setFilter] = useState({

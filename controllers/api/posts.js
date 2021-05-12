@@ -17,7 +17,7 @@ async function getUserPosts(req,res) {
 
 async function getFilteredPosts(req,res) {
     const user = await User.findById(req.user._id)
-    const posts = await Post.filterPosts(req.body, user.location);
+    const posts = await Post.filterPosts(req.body, user.location, req.user);
     res.json(posts);
 }
 

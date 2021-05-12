@@ -17,8 +17,9 @@ postSchema.statics.getAll = function (userId) {
     return this.find({ user: userId });
 };
 
-postSchema.statics.filterPosts = async function (filter, location) {
-    const posts = await this.find(filter.category.length > 1 ? { category: filter.category} : {}).populate('user');
+postSchema.statics.filterPosts = async function (filter, location, user) {
+    const postsWithUser = await this.find(filter.category.length > 1 ? { category: filter.category} : {}).populate('user');
+    const posts = postsWithUser.filter(function (post){return !post.user._id.equals(user._id)})
     let locationFilter = []
     posts.forEach(post => {
         if (distance(location.latitude, post.user.location.latitude, location.longitude, post.user.location.longitude) <= filter.distance) locationFilter.push(post)
@@ -48,3 +49,4 @@ function distance(lat1, lat2, lon1, lon2) {
     let r = 3965;
     return (c * r);
 }
+

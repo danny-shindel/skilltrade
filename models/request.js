@@ -3,10 +3,11 @@ const Schema = mongoose.Schema;
 
 const requestSchema = new Schema({
     post: { type: Schema.Types.ObjectId, ref: 'Post' },
-    skills: {type: Array, required:true},
+    skills: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     distance: {type: Number, required: true},
     status: {type: String, required:true, default:"pending"},
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    barterUser: { type: Schema.Types.ObjectId, ref: 'User' },
+    postUser: { type: Schema.Types.ObjectId, ref: 'User' },
     message: { type: String, default:"no message" },
 }, {
     timestamps: true,
@@ -15,8 +16,19 @@ const requestSchema = new Schema({
 
 requestSchema.statics.createRequest = async function(body, user) {
     const barterDistance = distance(body.post.user.location.latitude, user.location.latitude, body.post.user.location.longitude, user.location.longitude)
-    const request = await this.create({...body, 'distance':barterDistance, 'user':user._id})
+    const request = await this.create({...body, 'distance':barterDistance, 'barterUser':user._id, 'postUser':body.post.user._id})
     return request
+}
+
+requestSchema.statics.getAll = async function (user) {
+    const userSent = await this.find({ 'barterUser': user._id }).populate('post').populate('skills').exec()
+    const userRecieve = await this.find({ 'postUser': user._id }).populate('post').populate('skills').exec()
+    const sent = userSent.filter(function(request){ return request.status === 'pending' || request.status==='denied'})
+    const pending = userRecieve.filter(function(request){ return request.status === 'pending' })
+    const filter1 = userSent.filter(function(request){ return request.status === 'accepted'})
+    const filter2 = userRecieve.filter(function(request){ return request.status === 'accepted'})
+    const accepted = filter1.concat(filter2)
+    return { 'accepted':accepted, 'pending':pending, 'sent':sent }
 }
 
 module.exports = mongoose.model('Request', requestSchema);

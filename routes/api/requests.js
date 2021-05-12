@@ -3,7 +3,8 @@ const router = express.Router();
 const requestsCtrl = require('../../controllers/api/requests');
 
 // POST /api/users
-router.post('/', requestsCtrl.create);
+router.get('/', requestsCtrl.getAll);
+router.post('/create', requestsCtrl.create);
 // POST /api/users/login
 // router.post('/login', usersCtrl.login);
 // // GET /api/users/check-token

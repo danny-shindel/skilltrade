@@ -31,7 +31,7 @@ export default function PostDetail({ detail, setDetail, user, userPosts }){
         <div>{detail.title}</div>
         <div>{detail.title}</div>
         <div onClick={() => setDetail(false)}>BACK</div>
-        <div className={detail.user._id === user._id ? 'display-none' : ''} onClick={() => setBarter(true)}>BARTER</div>
+        <div onClick={() => setBarter(true)}>BARTER</div>
             </> : <>
                 <select name="skills" onChange={handleSelectChange} required multiple>
                 {userPosts.map(post => (
