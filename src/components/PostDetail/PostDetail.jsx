@@ -1,3 +1,4 @@
+import * as requestsAPI from '../../utilities/requests-api';
 import { useState } from 'react'
 import './PostDetail.css'
 
@@ -17,6 +18,11 @@ export default function PostDetail({ detail, setDetail, user, userPosts }){
         setRequestInfo({ ...requestInfo, skills: newSkillsArray })
     }
 
+    async function handleBarter() {
+        const newRequest = await requestsAPI.create(requestInfo);
+        setDetail(false)
+    }
+
     return (
     <div className="PostDetail">
         { !barter ?  <> 
@@ -33,6 +39,7 @@ export default function PostDetail({ detail, setDetail, user, userPosts }){
                 ))}
             </select>
             <input name="message" onChange={handleChange}></input>
+            <div onClick={handleBarter}>SEND BARTER REQUEST</div> 
             <div onClick={() => setBarter(false)}>CANCEL</div> 
             </> }
     </div>
