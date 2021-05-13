@@ -1,29 +1,36 @@
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const uuid = require('uuid');
+const BASE_URL = process.env.S3_BASE_URL;
+const BUCKET = process.env.S3_BUCKET;
+const REGION = process.env.REGION;
 
 module.exports = {
   create,
   login,
-  checkToken
+  createNoPic
 };
-
-function checkToken(req, res) {
-  // req.user will always be there IF a valid token was sent
-  // in the fetch request
-  console.log(req.user);
-  res.json(req.exp);
-}
 
 async function create(req, res) {
   try {
-    const user = await User.create(req.body);
+    const url = await User.savePhoto(req)
+    const user = await User.create({...req.body, profilepic: url});
     const token = createJWT(user);
-    // Yes, we can send back a simple string
     res.json(token);
   } catch(err) {
-    // Client will check for non-200 status code
-    // 400 = Bad Request
+    res.status(400).json(err);
+  }
+}
+
+async function createNoPic(req, res) {
+  try {
+    const user = await User.create(req.body);
+    console.log('here')
+    const token = createJWT(user);
+    res.json(token);
+  } catch (err) {
     res.status(400).json(err);
   }
 }
@@ -44,7 +51,6 @@ async function login(req, res) {
 
 function createJWT(user) {
   return jwt.sign(
-    // data payload
     { user },
     process.env.SECRET,
     { expiresIn: '24h' }

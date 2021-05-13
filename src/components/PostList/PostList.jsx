@@ -6,7 +6,7 @@ import PostEdit from '../PostEdit/PostEdit';
 import * as postsAPI from '../../utilities/posts-api';
 import './PostList.css';
 
-export default function PostList({ user }) {
+export default function PostList({ user, crossReference ,setCrossReference }) {
     const [selected, setSelected] = useState('SKILLS')
     const [create, setCreate] = useState(false)
     const [posts, setPosts] = useState([])
@@ -27,7 +27,9 @@ export default function PostList({ user }) {
     const list = postItems.map(item =>
         <PostItem
             post={item}
-            setDetail={setDetail}
+            setDetail={setDetail} 
+            crossReference={crossReference} 
+            setCrossReference={setCrossReference}
         />
     );
 
@@ -78,7 +80,7 @@ export default function PostList({ user }) {
                     </div>
                     {list}
                 </> : selected === 'SKILLS' ? 
-                <PostDetail detail={detail} setDetail={setDetail} user={user} userPosts={userPosts}/> :
+                <PostDetail detail={detail} setDetail={setDetail} user={user} userPosts={userPosts} crossReference={crossReference} setCrossReference={setCrossReference} /> :
                 <PostEdit detail={detail} setDetail={setDetail} categories={categories} setUserPosts={setUserPosts} setPosts={setPosts} filter={filter} />
                 :
                 <PostCreate setCreate={setCreate} setUserPosts={setUserPosts} categories={categories} setPosts={setPosts} filter={filter}/>

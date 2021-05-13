@@ -9,6 +9,7 @@ export default function Dashboard({ user}) {
   const [accepted, setAccepted] = useState([])
   const [pending, setPending] = useState([])
   const [sent, setSent] = useState([])
+  const [crossReference, setCrossReference] = useState([])
 
 
   useEffect(function () {
@@ -17,14 +18,15 @@ export default function Dashboard({ user}) {
       setAccepted(requests.accepted)
       setPending(requests.pending)
       setSent(requests.sent)
+      setCrossReference(requests.crossReference)
     }
     getRequest()
   }, []);
 
   return (
     <div className="Dashboard">
-      <PostList user={user}/>
-      <RequestList />
+      <PostList user={user} crossReference={crossReference} setCrossReference={setCrossReference}/>
+      <RequestList accepted={accepted} setAccepted={setAccepted} pending={pending} setPending={setPending} sent={sent} setSent={setSent}/>
     </div>
   );
 }

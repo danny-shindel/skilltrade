@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const uuid = require('uuid');
+const BASE_URL = process.env.S3_BASE_URL;
+const BUCKET = process.env.S3_BUCKET;
+const REGION = process.env.REGION;
 
 const SALT_ROUNDS = 6;
 
@@ -22,6 +27,9 @@ const userSchema = new Schema({
   location: {
     type: Object,
     required: true
+  },
+  profilepic: {
+    type: String
   }
 }, {
   timestamps: true,
@@ -32,6 +40,30 @@ const userSchema = new Schema({
     }
   }
 });
+
+userSchema.statics.savePhoto = async function (req) {
+  const hex = uuid.v4().slice(uuid.v4().length - 6);
+  const fileExtension = req.file.mimetype.match(/[/](.*)/)[1].replace('', '.');
+  const uploadParams = {
+    Bucket: process.env.S3_BUCKET,
+    Key: hex + fileExtension,
+    Body: req.file.buffer
+  }
+  const s3 = new S3Client({ region: REGION });
+  console.log('1')
+  const run = async () => {
+    try {
+      const data = await s3.send(new PutObjectCommand(uploadParams));
+      console.log("Success", data);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+  run();
+  console.log('dave')
+  const url = `${BASE_URL}${BUCKET}/${uploadParams.Key}`;
+  return url
+}
 
 userSchema.pre('save', function(next) {
   const user = this;

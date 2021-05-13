@@ -24,11 +24,15 @@ requestSchema.statics.getAll = async function (user) {
     const userSent = await this.find({ 'barterUser': user._id }).populate('post').populate('skills').exec()
     const userRecieve = await this.find({ 'postUser': user._id }).populate('post').populate('skills').exec()
     const sent = userSent.filter(function(request){ return request.status === 'pending' || request.status==='denied'})
+    const sentPending = userSent.filter(function(request){ return request.status === 'pending'})
     const pending = userRecieve.filter(function(request){ return request.status === 'pending' })
     const filter1 = userSent.filter(function(request){ return request.status === 'accepted'})
     const filter2 = userRecieve.filter(function(request){ return request.status === 'accepted'})
     const accepted = filter1.concat(filter2)
-    return { 'accepted':accepted, 'pending':pending, 'sent':sent }
+    const crossReferenceList = filter1.concat(sentPending)
+    const crossReference = crossReferenceList.map(function(request){return request.post._id})
+    console.log(crossReference)
+    return { 'accepted':accepted, 'pending':pending, 'sent':sent, 'crossReference':crossReference }
 }
 
 module.exports = mongoose.model('Request', requestSchema);

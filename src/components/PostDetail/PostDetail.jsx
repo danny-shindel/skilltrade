@@ -2,13 +2,15 @@ import * as requestsAPI from '../../utilities/requests-api';
 import { useState } from 'react'
 import './PostDetail.css'
 
-export default function PostDetail({ detail, setDetail, user, userPosts }){
+export default function PostDetail({ detail, setDetail, user, userPosts, crossReference, setCrossReference }){
     const [barter, setBarter] = useState(false);
     const [requestInfo, setRequestInfo] = useState({
         post: detail,
         skills: [],
         message: null,
     })
+
+    console.log(crossReference)
 
     const handleChange = (evt) => {
         setRequestInfo({ ...requestInfo, [evt.target.name]: evt.target.value });
@@ -19,8 +21,10 @@ export default function PostDetail({ detail, setDetail, user, userPosts }){
     }
 
     async function handleBarter() {
-        const newRequest = await requestsAPI.create(requestInfo);
+        await requestsAPI.create(requestInfo);
+        setBarter(false)
         setDetail(false)
+        setCrossReference([...crossReference, detail._id])
     }
 
     return (
@@ -31,7 +35,7 @@ export default function PostDetail({ detail, setDetail, user, userPosts }){
         <div>{detail.title}</div>
         <div>{detail.title}</div>
         <div onClick={() => setDetail(false)}>BACK</div>
-        <div onClick={() => setBarter(true)}>BARTER</div>
+        <div className={ crossReference.includes(detail._id) && 'display-none' } onClick={() => setBarter(true)}>BARTER</div>
             </> : <>
                 <select name="skills" onChange={handleSelectChange} required multiple>
                 {userPosts.map(post => (
@@ -39,7 +43,7 @@ export default function PostDetail({ detail, setDetail, user, userPosts }){
                 ))}
             </select>
             <input name="message" onChange={handleChange}></input>
-            <div onClick={handleBarter}>SEND BARTER REQUEST</div> 
+            <div onClick={handleBarter}>SEND BARTER REQUEST</div>
             <div onClick={() => setBarter(false)}>CANCEL</div> 
             </> }
     </div>
