@@ -31,8 +31,13 @@ requestSchema.statics.getAll = async function (user) {
     const accepted = filter1.concat(filter2)
     const crossReferenceList = filter1.concat(sentPending)
     const crossReference = crossReferenceList.map(function(request){return request.post._id})
-    console.log(crossReference)
     return { 'accepted':accepted, 'pending':pending, 'sent':sent, 'crossReference':crossReference }
+}
+
+requestSchema.statics.getSent = async function (user) {
+    const userSent = await this.find({ 'barterUser': user._id }).populate('post').populate('skills').exec()
+    const sent = userSent.filter(function (request) { return request.status === 'pending' || request.status === 'denied' })
+    return sent
 }
 
 module.exports = mongoose.model('Request', requestSchema);

@@ -9,3 +9,11 @@ export function create(requestInfo) {
 export function getAll() {
     return sendRequest(BASE_URL);
 }
+
+export function updateStatus(status) {
+    return sendRequest(`${BASE_URL}/update`, 'POST', status);
+}
+
+export function deleteRequest(requestId) {
+    return sendRequest(`${BASE_URL}/${requestId}`, 'DELETE');
+}

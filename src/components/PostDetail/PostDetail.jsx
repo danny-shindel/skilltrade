@@ -2,15 +2,13 @@ import * as requestsAPI from '../../utilities/requests-api';
 import { useState } from 'react'
 import './PostDetail.css'
 
-export default function PostDetail({ detail, setDetail, user, userPosts, crossReference, setCrossReference }){
+export default function PostDetail({ detail, setDetail, user, userPosts, crossReference, setCrossReference, setSent }){
     const [barter, setBarter] = useState(false);
     const [requestInfo, setRequestInfo] = useState({
         post: detail,
         skills: [],
         message: null,
     })
-
-    console.log(crossReference)
 
     const handleChange = (evt) => {
         setRequestInfo({ ...requestInfo, [evt.target.name]: evt.target.value });
@@ -21,10 +19,11 @@ export default function PostDetail({ detail, setDetail, user, userPosts, crossRe
     }
 
     async function handleBarter() {
-        await requestsAPI.create(requestInfo);
+        const newSent = await requestsAPI.create(requestInfo);
         setBarter(false)
         setDetail(false)
         setCrossReference([...crossReference, detail._id])
+        setSent(newSent)
     }
 
     return (

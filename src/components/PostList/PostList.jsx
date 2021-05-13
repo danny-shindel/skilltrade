@@ -6,7 +6,7 @@ import PostEdit from '../PostEdit/PostEdit';
 import * as postsAPI from '../../utilities/posts-api';
 import './PostList.css';
 
-export default function PostList({ user, crossReference ,setCrossReference }) {
+export default function PostList({ user, crossReference, setCrossReference, setSent }) {
     const [selected, setSelected] = useState('SKILLS')
     const [create, setCreate] = useState(false)
     const [posts, setPosts] = useState([])
@@ -52,16 +52,22 @@ export default function PostList({ user, crossReference ,setCrossReference }) {
         setPosts(filterSearch)
     }
 
+    function handleSelection(tab) {
+        setSelected(tab)
+        setDetail(false)
+        setCreate(false)
+    }
+
     return (
        <div className="PostList">
+                    <div>
+                        <button onClick={(evt) => handleSelection('SKILLS')}>SKILLS</button>
+                        <button onClick={(evt) => handleSelection('MANAGE')}>MANAGE</button>
+                    </div>
             { !create ?
                 !detail ? <>
-                    <div>
-                        <button onClick={(evt) => setSelected(evt.target.innerHTML)}>SKILLS</button>
-                        <button onClick={(evt) => setSelected(evt.target.innerHTML)}>MANAGE</button>
-                    </div>
                     <div className={selected === 'MANAGE' ? 'display-none' : ''}>
-                        <input type="text" name="title" onChange={handleChange} required/>
+                        <input type="text" autoComplete="off" name="title" onChange={handleChange} required/>
                         <select name="distance" onChange={handleChange} value={filter.distance} required>
                             {miles.map(mile =>
                                 <option value={mile}>{mile}</option>
@@ -80,7 +86,8 @@ export default function PostList({ user, crossReference ,setCrossReference }) {
                     </div>
                     {list}
                 </> : selected === 'SKILLS' ? 
-                <PostDetail detail={detail} setDetail={setDetail} user={user} userPosts={userPosts} crossReference={crossReference} setCrossReference={setCrossReference} /> :
+                <PostDetail detail={detail} setDetail={setDetail} user={user} userPosts={userPosts} 
+                            crossReference={crossReference} setCrossReference={setCrossReference} setSent={setSent}/> :
                 <PostEdit detail={detail} setDetail={setDetail} categories={categories} setUserPosts={setUserPosts} setPosts={setPosts} filter={filter} />
                 :
                 <PostCreate setCreate={setCreate} setUserPosts={setUserPosts} categories={categories} setPosts={setPosts} filter={filter}/>

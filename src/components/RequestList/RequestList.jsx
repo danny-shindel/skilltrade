@@ -1,42 +1,48 @@
 import { useState } from 'react';
-import RequestAccepted from '../RequestAccepted/RequestAccepted';
-import RequestPending from '../RequestPending/RequestPending';
-import RequestSent from '../RequestSent/RequestSent';
+import RequestItem from '../RequestItem/RequestItem';
+import RequestDetail from '../RequestDetail/RequestDetail';
+import * as requestAPI from '../../utilities/requests-api'
 import './RequestList.css';
 
-export default function RequestList({ accepted, setAccepted, pending, setPending, sent, setSent }) {
+export default function RequestList({ accepted, setAccepted, pending, setPending, sent, setSent, setCrossReference }) {
     const [selected, setSelected] = useState('ACCEPTED')
+    const [detail, setDetail] = useState(false)
 
-    const acceptedRequests = accepted.map(request =>
-        <RequestAccepted
+    const requestItems = selected === 'ACCEPTED' ? accepted : selected === 'PENDING' ? pending : sent;
+    const requestList = requestItems.map(request =>
+        <RequestItem
             request={request}
-            setAccepted={setAccepted}
+            setDetail={setDetail}
         />
     );
 
-    const pendingRequests = pending.map(request =>
-        <RequestPending
-            request={request}
-            setPending={setPending}
-        />
-    );
+    function handleSelection(tab) {
+        setSelected(tab)
+        setDetail(false)
+    }
 
-    const sentRequests = sent.map(request =>
-        <RequestSent
-            request={request}
-            setSent={setSent}
-        />
-    );
+    async function handleStatus(status) {
+        const requests = await requestAPI.updateStatus({'id':detail._id, 'status':status});
+        setAccepted(requests.accepted)
+        setPending(requests.pending)
+        setSent(requests.sent)
+        setCrossReference(requests.crossReference)
+        setDetail(false)
+    }
+
+    async function handleDelete(requestId) {
+        const requests = await requestAPI.deleteRequest(requestId);
+        setSent(requests)
+        setDetail(false)
+    }
 
     return (
         <div className="RequestList">
-            <div><button onClick={() => setSelected('ACCEPTED')}>ACCEPTED</button>
-                <button onClick={() => setSelected('PENDING')}>PENDING</button>
-                <button onClick={() => setSelected('SENT')}>SENT</button>
+            <div><button onClick={() => handleSelection('ACCEPTED')}>ACCEPTED</button>
+                <button onClick={() => handleSelection('PENDING')}>PENDING</button>
+                <button onClick={() => handleSelection('SENT')}>SENT</button>
             </div>
-            { selected==='ACCEPTED' && acceptedRequests}
-            { selected==='PENDING' && pendingRequests}
-            { selected==='SENT' && sentRequests}
+            { !detail ? <> {requestList} </> : <RequestDetail detail={detail} setDetail={setDetail} selected={selected} handleStatus={handleStatus} handleDelete={handleDelete}/> }
         </div>
     );
 }

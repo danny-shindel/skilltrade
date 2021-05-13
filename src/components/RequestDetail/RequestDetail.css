@@ -1,10 +1,11 @@
-.RequestAccepted {
-  width: 100%;
+.RequestDetail {
+   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 91%;
   align-items: center;
   margin-top: 1vmin;
-  margin-bottom: 2vmin;
   padding: 2vmin;
   color: var(--text-light);
   background-color: var(--white);
@@ -12,6 +13,5 @@
   border-radius: 1vmin;
   font-size: 4vmin;
 }
-
 
 

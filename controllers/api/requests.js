@@ -6,17 +6,35 @@ const Request = require('../../models/request');
 module.exports = {
     create,
     getAll,
+    updateStatus,
+    deleteRequest
 };
 
 async function create(req, res) {
-    const request = await Request.createRequest( req.body, req.user)
-    res.json(request);
+    await Request.createRequest( req.body, req.user)
+    const requests = await Request.getSent(req.user)
+    res.json(requests)
 }
 
 async function getAll(req, res) {
     const allRequests = await Request.getAll(req.user)
     res.json(allRequests)
 }
+
+async function updateStatus(req, res) {
+    await Request.findByIdAndUpdate(req.body.id, { 'status':req.body.status })
+    const allRequests = await Request.getAll(req.user)
+    res.json(allRequests)
+}
+
+async function deleteRequest(req, res) {
+    console.log('here')
+    await Request.findByIdAndDelete(req.params.id)
+    const requests = await Request.getSent(req.user)
+    res.json(requests)
+}
+
+
 
 
 
