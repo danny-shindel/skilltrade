@@ -1,11 +1,6 @@
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
-const uuid = require('uuid');
-const BASE_URL = process.env.S3_BASE_URL;
-const BUCKET = process.env.S3_BUCKET;
-const REGION = process.env.REGION;
 
 module.exports = {
   create,

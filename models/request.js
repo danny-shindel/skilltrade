@@ -40,6 +40,11 @@ requestSchema.statics.getSent = async function (user) {
     return sent
 }
 
+requestSchema.statics.deleteAssociated = async function (id) {
+    await this.deleteMany({ $or:[{post: id },{skills: id}]});
+    return 
+}
+
 module.exports = mongoose.model('Request', requestSchema);
 
 function distance(lat1, lat2, lon1, lon2) {

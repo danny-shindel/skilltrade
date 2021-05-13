@@ -25,7 +25,7 @@ export default function Dashboard({ user}) {
 
   return (
     <div className="Dashboard">
-      <PostList user={user} crossReference={crossReference} setCrossReference={setCrossReference} setSent={setSent}/>
+      <PostList user={user} crossReference={crossReference} setCrossReference={setCrossReference} setSent={setSent} setPending={setPending} setAccepted={setAccepted}/>
       <RequestList accepted={accepted} setAccepted={setAccepted} pending={pending} setPending={setPending} sent={sent} setSent={setSent} setCrossReference={setCrossReference}/>
     </div>
   );

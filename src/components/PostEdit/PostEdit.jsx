@@ -2,7 +2,7 @@ import { useState } from 'react'
 import * as postsAPI from '../../utilities/posts-api';
 import './PostEdit.css'
 
-export default function PostDetail({ detail, setDetail, categories, setUserPosts, setPosts, filter }) {
+export default function PostDetail({ detail, setDetail, categories, setUserPosts, setPosts, filter, setAccepted, setPending, setCrossReference, setSent }) {
     const [newPost, setNewPost] = useState({
         title: detail.title,
         category: detail.category,
@@ -23,11 +23,15 @@ export default function PostDetail({ detail, setDetail, categories, setUserPosts
     }
 
     async function handleDelete(post) {
-        const newUserPosts = await postsAPI.deletePost(post);
+        const response = await postsAPI.deletePost(post);
         const allFilteredPosts = await postsAPI.getFilteredPosts(filter);
         setDetail(false)
-        setUserPosts(newUserPosts)
+        setUserPosts(response.posts)
         setPosts(allFilteredPosts)
+        setAccepted(response.requests.accepted)
+        setPending(response.requests.pending)
+        setSent(response.requests.sent)
+        setCrossReference(response.requests.crossReference)
     }
 
 

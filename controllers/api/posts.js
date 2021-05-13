@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 const Post = require('../../models/post');
+const Request = require('../../models/request');
 
 
 module.exports = {
@@ -29,8 +30,10 @@ async function create(req,res) {
 
 async function deletePost(req,res) {
     await Post.findOneAndDelete({_id:req.body._id, user:req.user._id});
+    await Request.deleteAssociated(req.body._id)
     const posts = await Post.getAll(req.user._id);
-    res.json(posts);
+    const allRequests = await Request.getAll(req.user)
+    res.json({'posts':posts, 'requests':allRequests});
 }
 
 async function updatePost(req,res) {
