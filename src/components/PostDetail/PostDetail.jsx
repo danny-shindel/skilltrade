@@ -29,21 +29,26 @@ export default function PostDetail({ detail, setDetail, user, userPosts, crossRe
     return (
     <div className="PostDetail">
         { !barter ?  <> 
-        <div>PostDetail</div>
         <div>{detail.title}</div>
-        <div>{detail.title}</div>
-        <div>{detail.title}</div>
-        <div onClick={() => setDetail(false)}>BACK</div>
-        <div className={ crossReference.includes(detail._id) && 'display-none' } onClick={() => setBarter(true)}>BARTER</div>
+        <div>{detail.category}</div>
+        <div>{detail.description}</div>
+        <div id="PostDetailButtons">
+            <button onClick={() => setDetail(false)}>BACK</button>
+            <button className={ crossReference.includes(detail._id) && 'display-none' } onClick={() => setBarter(true)}>BARTER</button>
+        </div>
             </> : <>
-                <select name="skills" onChange={handleSelectChange} required multiple>
+            <select name="skills" onChange={handleSelectChange} required multiple>
                 {userPosts.map(post => (
                     <option value={post._id}>{post.title}</option>
                 ))}
             </select>
-            <input name="message" onChange={handleChange}></input>
-            <div onClick={handleBarter}>SEND BARTER REQUEST</div>
-            <div onClick={() => setBarter(false)}>CANCEL</div> 
+            <label>Choose Skill To Barter</label>
+            <textarea name="message" onChange={handleChange} />
+           <label>Message</label>
+            <div id="PostDetailButtons">
+                <button onClick={handleBarter}>SEND</button>
+                <button onClick={() => setBarter(false)}>CANCEL</button> 
+            </div>
             </> }
     </div>
     )

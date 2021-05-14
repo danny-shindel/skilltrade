@@ -1,0 +1,34 @@
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1vmin 0 1vmin;
+    margin-top: -1vmin;
+}
+
+#title {
+    color:white;
+    font-family: font6;
+    font-size: 6vmin;
+}
+
+#picholder {
+    height: 7vmin;
+    width: 7vmin;
+    border-radius: 50%;
+    background-position: center;
+    background-size: contain;
+}
+
+#userinfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: .2vmin;
+}
+
+#userinfo > span {
+    color: white;
+    font-size: 4vmin;
+    margin-right: 1.3vmin;
+    font-family: font5;
+}

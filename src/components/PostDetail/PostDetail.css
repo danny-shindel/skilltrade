@@ -8,8 +8,58 @@
   margin-top: 1vmin;
   padding: 2vmin;
   color: var(--text-light);
-  background-color: var(--white);
-  border: .1vmin solid var(--tan-3);
+  background-color: #a5c2bc;
   border-radius: 1vmin;
   font-size: 4vmin;
+}
+
+#PostDetailButtons {
+  display: flex;
+}
+
+#PostDetailButtons > button {
+  margin: 2vmin 1vmin 0vmin 1vmin;
+  margin: 1vmin;
+  padding: 1vmin;
+  color: #7bbda8;
+  font-size: 2vmin;
+  font-family: font6;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  border-radius: .5vmin;
+  outline: none;
+  cursor: pointer;
+  width: 15vmin;
+  background-color: #5e8782;
+}
+
+#PostDetailButtons > button:hover {
+  color: white;
+}
+
+.PostDetail > label {
+  margin-bottom: 3vmin;
+}
+
+.PostDetail > textarea {
+  width: 60vmin;
+  height: 30vmin;
+  padding: 1vmin;
+  font-size: 2vmin;
+  border: .1vmin solid var(--tan-3);
+  border-radius: .5vmin;
+  color: var(--text-dark);
+  background-image: none !important; /* prevent lastpass */
+  outline: none;
+}
+
+.PostDetail > select {
+  font-size: 3vmin;
+  border: .1vmin solid var(--tan-3);
+  border-radius: .5vmin;
+  color: var(--text-dark);
+  background-image: none !important; /* prevent lastpass */
+  outline: none;
+  width: 30vmin;
 }

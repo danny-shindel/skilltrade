@@ -28,10 +28,10 @@ async function updateStatus(req, res) {
 }
 
 async function deleteRequest(req, res) {
-    console.log('here')
     await Request.findByIdAndDelete(req.params.id)
     const requests = await Request.getSent(req.user)
-    res.json(requests)
+    const ref = await Request.getRef(req.user)
+    res.json({'requests':requests,'reference':ref})
 }
 
 

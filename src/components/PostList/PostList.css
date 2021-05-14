@@ -1,8 +1,8 @@
 .PostList {
-  background-color: var(--tan-1);
-  border: .1vmin solid var(--tan-3);
+  background-color: #B6D6CC;
+  border: .1vmin solid black;
   border-radius: 2vmin;
-  margin: 3vmin 0;
+  margin: 1vmin 0;
   padding: 2vmin 3vmin 3vmin 3vmin;
   overflow-y: scroll;
 }
@@ -14,11 +14,53 @@
   align-items: center;
   margin-top: 1vmin;
   margin-bottom: 2vmin;
-  padding: 2vmin;
+  padding: 2.2vmin;
   color: var(--text-light);
-  background-color: var(--white);
-  border: .1vmin solid var(--tan-3);
   border-radius: 1vmin;
   font-size: 4vmin;
-  background-color: lightgreen;
+  background-color: #a5c2bc;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addNew:hover {
+  color: white;
+}
+
+#buttonholder {
+  display: flex;
+  justify-content: center;
+}
+
+.filtersearch {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1vmin;
+  margin-bottom: 2vmin;
+  padding: 1.5vmin;
+  color: var(--text-light);
+  border-radius: 1vmin;
+  font-size: 4vmin;
+  background-color: #a5c2bc;
+}
+
+.filtersearch > select {
+  padding: 1vmin;
+  font-size: 2vmin;
+  border: .1vmin solid var(--tan-3);
+  border-radius: .5vmin;
+  color: var(--text-dark);
+  background-image: none !important; /* prevent lastpass */
+  outline: none;
+}
+
+.filtersearch > button {
+  color: #7bbda8;
+  background-color: #5e8782;
+}
+
+.filtersearch > button:hover {
+  color: white;
 }

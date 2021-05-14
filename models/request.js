@@ -40,6 +40,15 @@ requestSchema.statics.getSent = async function (user) {
     return sent
 }
 
+requestSchema.statics.getRef = async function (user) {
+    const userSent = await this.find({ 'barterUser': user._id }).populate('post').populate('skills').exec()
+    const sentPending = userSent.filter(function (request) { return request.status === 'pending' })
+    const filter1 = userSent.filter(function (request) { return request.status === 'accepted' })
+    const crossReferenceList = filter1.concat(sentPending)
+    const crossReference = crossReferenceList.map(function (request) { return request.post._id })
+    return crossReference
+}
+
 requestSchema.statics.deleteAssociated = async function (id) {
     await this.deleteMany({ $or:[{post: id },{skills: id}]});
     return 

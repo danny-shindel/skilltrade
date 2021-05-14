@@ -1,8 +1,17 @@
 .RequestList {
-  background-color: var(--tan-1);
-  border: .1vmin solid var(--tan-3);
+  background-color: #B6D6CC;
+  border: .1vmin solid black;
   border-radius: 2vmin;
-  margin: 3vmin 0;
+  margin: 1vmin 0;
   padding: 2vmin 3vmin 3vmin 3vmin;
   overflow-y: scroll;
+}
+
+#buttonholder {
+  display: flex;
+  justify-content: center;
+}
+
+#selected {
+  color: white;
 }

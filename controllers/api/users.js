@@ -11,7 +11,11 @@ module.exports = {
 async function create(req, res) {
   try {
     const url = await User.savePhoto(req)
-    const user = await User.create({...req.body, profilepic: url});
+    const locationObj = { "latitude" : req.body.latitude, "longitude" : req.body.longitude }
+    const newObj = {...req.body}
+    delete newObj.latitude
+    delete newObj.longitude
+    const user = await User.create({...newObj, location: locationObj, profilepic: url});
     const token = createJWT(user);
     res.json(token);
   } catch(err) {

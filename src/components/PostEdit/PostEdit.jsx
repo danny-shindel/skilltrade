@@ -37,20 +37,22 @@ export default function PostDetail({ detail, setDetail, categories, setUserPosts
 
     return (
         <div className="PostEdit" >
-            <form autoComplete="off" onSubmit={handleUpdate}>
-                <label>Title</label>
+            <form autoComplete="off" onSubmit={handleUpdate} id="PostEditForm">
                 <input type="text" name="title" onChange={handleChange} value={newPost.title} required />
-                <label>Category</label>
+                <label>Title</label>
+                <textarea type="text" name="description" onChange={handleChange} required value={newPost.description}/>
+                <label>Description</label>
                 <select name="category" onChange={handleChange} value={newPost.category} required>
                     {categories.map(cat => (
                         <option value={cat}>{cat}</option>
-                    ))}
+                        ))}
                 </select>
-                <label>Description</label>
-                <input type="text" name="description" onChange={handleChange} required value={newPost.description}/>
-                <button type="submit">Update</button>
-                <button type="submit" onClick={() => setDetail(false)}>Cancel</button>
-                <div onClick={() => handleDelete(detail)}>DELETE</div>
+                <label>Category</label>
+                <div id="PostEditButtons">
+                    <button type="submit">UPDATE</button>
+                    <button type="submit" onClick={() => setDetail(false)}>CANCEL</button>
+                    <button id="PostEditDelete" onClick={() => handleDelete(detail)}>DELETE</button>
+                </div>
             </form>
         </div>
     );

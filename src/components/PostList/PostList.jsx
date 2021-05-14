@@ -60,13 +60,13 @@ export default function PostList({ user, crossReference, setCrossReference, setS
 
     return (
        <div className="PostList">
-                    <div>
-                        <button onClick={(evt) => handleSelection('SKILLS')}>SKILLS</button>
-                        <button onClick={(evt) => handleSelection('MANAGE')}>MANAGE</button>
+                    <div id="buttonholder">
+                <button onClick={(evt) => handleSelection('SKILLS')} id={selected === 'SKILLS' && "selected"}>SKILLS</button>
+                <button onClick={(evt) => handleSelection('MANAGE')} id={selected === 'MANAGE' && "selected"}>MANAGE</button>
                     </div>
             { !create ?
                 !detail ? <>
-                    <div className={selected === 'MANAGE' ? 'display-none' : ''}>
+                    <div className={selected === 'MANAGE' ? 'display-none' : 'filtersearch'}>
                         <input type="text" autoComplete="off" name="title" onChange={handleChange} required/>
                         <select name="distance" onChange={handleChange} value={filter.distance} required>
                             {miles.map(mile =>

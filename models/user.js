@@ -50,17 +50,13 @@ userSchema.statics.savePhoto = async function (req) {
     Body: req.file.buffer
   }
   const s3 = new S3Client({ region: REGION });
-  console.log('1')
   const run = async () => {
     try {
       const data = await s3.send(new PutObjectCommand(uploadParams));
-      console.log("Success", data);
     } catch (err) {
-      console.log("Error", err);
     }
   };
   run();
-  console.log('dave')
   const url = `${BASE_URL}${BUCKET}/${uploadParams.Key}`;
   return url
 }

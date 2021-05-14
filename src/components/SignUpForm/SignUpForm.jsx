@@ -28,7 +28,8 @@ export default class SignUpForm extends Component {
         formData.append("name",this.state.name)
         formData.append("email",this.state.email)
         formData.append("password",this.state.password)
-        formData.append("location",this.state.location)
+        formData.append("latitude",this.state.location.latitude)
+        formData.append("longitude",this.state.location.longitude)
         formData.append("profilepic",fileField.files[0])
         const user = await signUp(formData);
         this.props.setUser(user);

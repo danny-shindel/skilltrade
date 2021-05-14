@@ -1,15 +1,89 @@
 .PostEdit {
   width: 100%;
+  height: 91%;
   display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  height: 98%;
+  justify-content: space-between;
   align-items: center;
   margin-top: 1vmin;
+  margin-bottom: 2vmin;
   padding: 2vmin;
   color: var(--text-light);
-  background-color: var(--white);
-  border: .1vmin solid var(--tan-3);
+  background-color: #a5c2bc;
   border-radius: 1vmin;
   font-size: 4vmin;
+  display: grid;
+  justify-content: center;
+}
+
+#PostEditButtons {
+  display: flex;
+}
+
+#PostEditButtons > button {
+  margin: 2vmin 1vmin 0vmin 1vmin;
+  margin: 1vmin;
+  padding: 1vmin;
+  color: #7bbda8;
+  font-size: 2vmin;
+  font-family: font6;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  border-radius: .5vmin;
+  outline: none;
+  cursor: pointer;
+  width: 15vmin;
+  background-color: #5e8782;
+}
+
+#PostEditForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vmin;
+  margin-top: 5vmin;
+}
+
+#PostEditForm > label {
+  margin-bottom: 3vmin;
+}
+
+#PostEditForm > input {
+  width: 60vmin;
+}
+
+#PostEditForm > textarea {
+  width: 60vmin;
+  height: 30vmin;
+  padding: 1vmin;
+  font-size: 2vmin;
+  border: .1vmin solid var(--tan-3);
+  border-radius: .5vmin;
+  color: var(--text-dark);
+  background-image: none !important; /* prevent lastpass */
+  outline: none;
+}
+
+#PostEditForm > select {
+  font-size: 3vmin;
+  border: .1vmin solid var(--tan-3);
+  border-radius: .5vmin;
+  color: var(--text-dark);
+  background-image: none !important; /* prevent lastpass */
+  outline: none;
+}
+
+#PostEditButtons > button:hover {
+  color: white;
+}
+
+#PostEditButtons > #PostEditDelete {
+  color: #ffad96;
+  background-color: #ff673d;
+}
+
+#PostEditButtons > #PostEditDelete:hover {
+  background-color: #FF3A20;
+  color: white;
 }

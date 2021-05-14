@@ -7,7 +7,6 @@ export function signUp(userData) {
 }
 
 export function signUpNoPic(userData) {
-  console.log(2)
   return sendRequest(`${BASE_URL}/signup`, 'POST', userData);
 }
 

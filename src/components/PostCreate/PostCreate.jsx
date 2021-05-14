@@ -24,20 +24,22 @@ export default function PostCreate({ setCreate, setUserPosts, categories, setPos
 
     return (
         <div className="PostCreate" >
-                    <form autoComplete="off" onSubmit={handleSubmit}>
-                        <label>Title</label>
-                        <input type="text" name="title" onChange={handleChange} required />
-                        <label>Category</label>
-                        <select name="category" onChange={handleChange} required>
-                            {categories.map(cat => (
-                                <option value={cat}>{cat}</option>
-                            ))}
-                        </select>
-                        <label>Description</label>
-                        <input type="text" name="description" onChange={handleChange} required />
-                        <button type="submit">Create Post</button>
-                        <button type="submit" onClick={() => setCreate(false)}>Cancel</button>
-                    </form>
+            <form autoComplete="off" onSubmit={handleSubmit} id="PostCreateForm">
+                <input type="text" name="title" onChange={handleChange} required />
+                <label>Title</label>
+                <textarea type="text" name="description" onChange={handleChange} required />
+                <label>Description</label>
+                <select name="category" onChange={handleChange} required>
+                    {categories.map(cat => (
+                        <option value={cat}>{cat}</option>
+                        ))}
+                </select>
+                <label>Category</label>
+                <div id="PostCreateButtons">
+                    <button type="submit">CREATE</button>
+                    <button type="submit" onClick={() => setCreate(false)}>CANCEL</button>
+                </div>
+            </form>
         </div>
     );
 }

@@ -31,16 +31,17 @@ export default function RequestList({ accepted, setAccepted, pending, setPending
     }
 
     async function handleDelete(requestId) {
-        const requests = await requestAPI.deleteRequest(requestId);
-        setSent(requests)
+        const response = await requestAPI.deleteRequest(requestId);
+        setSent(response.requests)
+        setCrossReference(response.reference)
         setDetail(false)
     }
 
     return (
         <div className="RequestList">
-            <div><button onClick={() => handleSelection('ACCEPTED')}>ACCEPTED</button>
-                <button onClick={() => handleSelection('PENDING')}>PENDING</button>
-                <button onClick={() => handleSelection('SENT')}>SENT</button>
+            <div id="buttonholder"><button onClick={() => handleSelection('ACCEPTED')} id={selected ==='ACCEPTED' && "selected"}>ACCEPTED</button>
+                <button onClick={() => handleSelection('PENDING')} id={selected === 'PENDING' && "selected"}>PENDING</button>
+                <button onClick={() => handleSelection('SENT')} id={selected === 'SENT' && "selected"}>SENT</button>
             </div>
             { !detail ? <> {requestList} </> : <RequestDetail detail={detail} setDetail={setDetail} selected={selected} handleStatus={handleStatus} handleDelete={handleDelete}/> }
         </div>

@@ -7,10 +7,15 @@
   margin-bottom: 2vmin;
   padding: 2vmin;
   color: var(--text-light);
-  background-color: var(--white);
-  border: .1vmin solid var(--tan-3);
+  background-color: #F1FEC6;
+  border: .3vmin solid var(--text-light);
   border-radius: 1vmin;
   font-size: 4vmin;
+}
+
+.PostItem:hover {
+  border: .3vmin solid #29339B;
+  color: red;
 }
 
 
