@@ -12,21 +12,17 @@
     - My application is based on the idea of a skills and services bartering exchange. User’s can create an account on SkillTrade and post skills or services they would like to offer in exchange for other user’s skills or services. Users can search for skills or services they want and send requests to the user owner of that skill or services offering their skill or service for barter. User’s have access to a “request inbox” where they can see requests they’ve accepted, pending requests from other users, and pending requests that they’s sent 
 
 ## Screenshots
-<img  src="https://i.imgur.com/LapcrQz.png" width="80%">
+<img  src="https://i.imgur.com/yPK7oFA.png" width="80%">
 
-> Home Screen: The 5 movies on the home screen are the top 5 saved movies by user of Kino Spisok. Hovering over the movie poster reveals how many "spiske" or lists, they are saved to. All movies IMDB page are linked in any view with the "IMDB" link.
+> Search Skills: User's can search for skills to barter for in their area. They can filter by keyword search, distance, and skill category.
 
-<img  src="https://i.imgur.com/rVgM14u.png" width="80%">
+<img  src="https://i.imgur.com/tV6FyPv.png" width="80%">
 
-> Commenting: Commenting is only available to users and only on the top 5 movie home screen. By clicking the "comment" button, the input and comments drop down. Users can delete their own comments, but hovering over their avatar and clicking the red "x" for that comment. You can also add movies you don't already have saved, from the top 5.
+> User's Skills: User's can create, manage, and delete their posted skills.
 
-<img  src="https://i.imgur.com/IN7nKeU.png" width="80%">
+<img  src="https://i.imgur.com/TWnksPA.png" width="80%">
 
-> Watch List: Movies in your watch list are listed in alphabetical order by director. They provide a link to move that movie to your "seen" list, that movie's IMDB page link, and a delete link.
-
-<img  src="https://i.imgur.com/qDJjh7Z.png" width="80%">
-
-> Seen Link: Your "seen" list movies are delineated by their blue outline. Hovering over a "seen" movie's poster shows the rating a user gave it. That rating can be updated by just clicking on the desired star rating. The "unsee" link will move a movie back into a user's watch list. 
+> User's Inbox: User's can see the requests they have accepted, the request that are pending their acceptance or denial, and pending requests they have sent to other users.
 
 ## Technologies Used
 
