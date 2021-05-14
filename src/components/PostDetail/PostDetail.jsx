@@ -29,9 +29,9 @@ export default function PostDetail({ detail, setDetail, user, userPosts, crossRe
     return (
     <div className="PostDetail">
         { !barter ?  <> 
-        <div>{detail.title}</div>
-        <div>{detail.category}</div>
-        <div>{detail.description}</div>
+        <div>Title:{detail.title}</div>
+        <div>Category:{detail.category}</div>
+        <div>Description:{detail.description}</div>
         <div id="PostDetailButtons">
             <button onClick={() => setDetail(false)}>BACK</button>
             <button className={ crossReference.includes(detail._id) && 'display-none' } onClick={() => setBarter(true)}>BARTER</button>

@@ -4,7 +4,7 @@ export default function RequestItem({ request, setDetail }) {
 
     return (
         <div className="RequestItem" onClick={() => setDetail(request)}>
-            {request.message}
+            <div>{request.skills[0].title} for {request.post.title}</div>
         </div>
     );
 }
